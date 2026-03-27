@@ -1,32 +1,52 @@
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
+// Step 1: Create Bogie class
+class Bogie {
+    String name;
+    int capacity;
+
+    // Constructor
+    Bogie(String name, int capacity) {
+        this.name = name;
+        this.capacity = capacity;
+    }
+
+    // Display method
+    void display() {
+        System.out.println(name + " -> " + capacity);
+    }
+}
 public class Train_App {
-
     public static void main(String[] args) {
-        // Welcome message
-        System.out.println("=== Train Consist Management App ===");
-        System.out.println("UC6: Map Bogie to Capacity (HashMap)");
 
-        // Step 1: Create HashMap
-        HashMap<String, Integer> bogieCapacityMap = new HashMap<>();
+        System.out.println("=====================================");
+        System.out.println("UC7 - Sort Bogies by Capacity (Comparator)");
+        System.out.println("=====================================");
 
-        // Step 2: Insert bogie and capacity
-        bogieCapacityMap.put("Sleeper", 72);
-        bogieCapacityMap.put("AC Chair", 60);
-        bogieCapacityMap.put("First Class", 40);
-        bogieCapacityMap.put("Goods Rectangular", 100);
-        bogieCapacityMap.put("Goods Cylindrical", 80);
+        // Step 2: Create List
+        List<Bogie> bogieList = new ArrayList<>();
 
-        // Step 3: Display bogie capacity using entrySet()
-        System.out.println("\nBogie Capacity Details:");
+        // Step 3: Add Bogies
+        bogieList.add(new Bogie("Sleeper", 72));
+        bogieList.add(new Bogie("AC Chair", 56));
+        bogieList.add(new Bogie("First Class", 24));
+        bogieList.add(new Bogie("General", 90));
 
-        for (Map.Entry<String, Integer> entry : bogieCapacityMap.entrySet()) {
-            System.out.println("Bogie: " + entry.getKey() +
-                    " | Capacity: " + entry.getValue());
+        // Before Sorting
+        System.out.println("\nBefore Sorting:");
+        for (Bogie b : bogieList) {
+            b.display();
         }
 
-        // Program continues
-        System.out.println("\nProgram continues...");
+        // Step 4: Sort using Comparator (by capacity)
+        bogieList.sort(Comparator.comparingInt(b -> b.capacity));
+
+        // After Sorting
+        System.out.println("\nAfter Sorting by Capacity:");
+        for (Bogie b : bogieList) {
+            b.display();
+        }
+
+        System.out.println("\nUC7 sorting completed...");
     }
 }
