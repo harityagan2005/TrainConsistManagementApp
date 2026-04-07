@@ -1,24 +1,54 @@
-import java.util.ArrayList;
-import java.util.List;
-
+class CargoSafetyException extends RuntimeException {
+    public CargoSafetyException(String message) {
+        super(message);
+    }
+}
 public class Train_App {
+    static class GoodsBogie {
+        String shape;
+        String cargo;
+
+        GoodsBogie(String shape) {
+            this.shape = shape;
+        }
+
+        void assignCargo(String cargoType) {
+            try {
+
+                if (shape.equalsIgnoreCase("Rectangular") &&
+                        cargoType.equalsIgnoreCase("Petroleum")) {
+
+                    throw new CargoSafetyException("Unsafe cargo assignment!");
+                }
+
+                this.cargo = cargoType;
+                System.out.println("Cargo assigned successfully -> " + cargoType);
+
+            } catch (CargoSafetyException e) {
+                System.err.println("Error: " + e.getMessage());
+
+            } finally {
+                System.out.println("Cargo validation completed for " + shape + " bogie");
+            }
+        }
+    }
 
     public static void main(String[] args) {
 
-        // Welcome Message
-        System.out.println("===================================");
-        System.out.println("=== Train Consist Management App ===");
-        System.out.println("===================================");
+        System.out.println("===============================================");
+        System.out.println(" UC15 - Safe Cargo Assignment ");
+        System.out.println("===============================================\n");
 
-        // Initialize empty train consist
-        List<String> trainConsist = new ArrayList<>();
 
-        // Display initial state
-        System.out.println("\nTrain initialized successfully...");
-        System.out.println("Initial Bogie Count : " + trainConsist.size());
-        System.out.println("Current Train Consist : " + trainConsist);
+        GoodsBogie cylindrical = new GoodsBogie("Cylindrical");
+        cylindrical.assignCargo("Petroleum");
 
-        // System ready message
-        System.out.println("\nSystem ready for operations...");
+        System.out.println();
+
+
+        GoodsBogie rectangular = new GoodsBogie("Rectangular");
+        rectangular.assignCargo("Petroleum");
+
+        System.out.println("\nUC15 runtime handling completed...");
     }
 }
